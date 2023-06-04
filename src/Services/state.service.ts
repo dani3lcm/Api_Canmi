@@ -28,6 +28,12 @@ class StateService {
         return await this.stateRepository.deleteState(Id);
     }
 
+    async restoreState(Id:any) {
+        const testBaseRepository = await this.stateRepository.testBaseRepository(Id);
+        console.log(testBaseRepository);
+        return await this.stateRepository.restoreState(Id);
+    }
+
 }
 
 export default StateService;

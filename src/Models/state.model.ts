@@ -22,7 +22,8 @@ const State:ModelDefined<StateInterface, StateOptionalCreation> = db.define('Sta
         type: DataTypes.BOOLEAN
     }
 },{
-    tableName: 'state'
+    tableName: 'state',
+    paranoid: true,
 });
 
 export default State;

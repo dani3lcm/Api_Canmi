@@ -3,7 +3,7 @@ import { Model } from "sequelize";
 abstract class BaseRepository<Model> {
     public async testBaseRepository(Id:number) {
         return {
-            test : "ok",
+            test : "ok_testBaseRepository",
             Id
         };
     }

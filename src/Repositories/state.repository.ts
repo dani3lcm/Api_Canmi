@@ -77,6 +77,24 @@ class StateRepository extends BaseRepository<Model>{
         //return {status: `${data.deletedCount > 0 ? true : false}`};
     }
 
+    async restoreState(Id:any) {
+        let data = {};
+        try {            
+            const state = await this.model.findByPk(Id, { paranoid: false });  
+            if(!state){
+                // En caso de que no exista
+            }else{
+                await state.restore();
+                data = state;
+            }
+            return data;
+        } catch(err) {
+            //logger.error('Error::' + err);
+        }
+        return data;
+        //return {status: `${data.deletedCount > 0 ? true : false}`};
+    }
+
 
 }
 

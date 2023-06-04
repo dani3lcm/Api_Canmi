@@ -5,7 +5,7 @@ import StateService from "../Services/state.service";
 const stateService = new StateService();
 
 export const getStates = async (req: Request, res: Response) => {
-    try {        
+    try {
         const data = await stateService.getStates();
         res.json({
             msg: 'getStates',
@@ -21,8 +21,8 @@ export const getState = async (req: Request, res: Response) => {
         const { id } = req.params;
         const data = await stateService.getState(id);
         res.json({
-            msg: 'getState',   
-            id: id,         
+            msg: 'getState',
+            id: id,
             data: data
         });
     } catch (e) {
@@ -35,7 +35,7 @@ export const postState = async (req: Request, res: Response) => {
         const body = req.body;
         const data = stateService.createState(body);
         res.json({
-            msg: 'postStateee',
+            msg: 'postState',
             data: data
         });
     } catch (e) {
@@ -51,7 +51,7 @@ export const putState = async (req: Request, res: Response) => {
         res.json({
             msg: 'putState',
             id,
-            body: data
+            data: data
         });
     } catch (e) {
         handleHttp(res, "ERROR_PUT_STATE")
@@ -65,9 +65,23 @@ export const deleteState = async (req: Request, res: Response) => {
         res.json({
             msg: 'deleteState',
             id,
-            body: data
+            data: data
         });
     } catch (e) {
         handleHttp(res, "ERROR_DELETE_STATE")
+    }
+}
+
+export const restoreState = async (req: Request, res: Response) => {
+    try {
+        const { id } = req.params;
+        const data = stateService.restoreState(id);
+        res.json({
+            msg: 'restoreState',
+            id,
+            data: data
+        });
+    } catch (e) {
+        handleHttp(res, "ERROR_POST_STATE")
     }
 }
