@@ -30,10 +30,9 @@ class Server {
     }
 
     private startServer() {
-        const key = fs.readFileSync('./ssl/devdcm.com_private_key');
-        const cert = fs.readFileSync('./ssl/mi_certificado.crt');    //  Set up routes (and middlewares if we had any)
-
-        https.createServer({ key, cert }, this.app);
+        https.createServer({  
+            cert: fs.readFileSync('./ssl/bundle.cer'),
+            key: fs.readFileSync('./ssl/devdcm.com.key') }, this.app);
       }
 
      listen() {
