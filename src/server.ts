@@ -4,6 +4,8 @@ import swaggerUi from "swagger-ui-express";
 import swaggerSetup from "./Docs/swagger"
 import cors from "cors";
 import { router } from "./Routes";
+import * as https from 'https';
+import * as fs from 'fs';
 
 import db from "./Database/connection";
 
@@ -24,13 +26,24 @@ class Server {
         this.dbConnection();
         this.app.use(cors());
         this.app.use(router);
+        this.startServer();
     }
 
-    listen() {
-        this.app.listen(this.port, () => {
-            console.log(`Listo por el puerto ${this.port}`)
+    public startServer() {
+        const key = fs.readFileSync('./ssl/devdcm.com_private_key');
+        const cert = fs.readFileSync('./ssl/mi_certificado.crt');    //  Set up routes (and middlewares if we had any)
+
+        const server = https.createServer({ key, cert }, this.app);     
+        server.listen(this.port, () => {
+            console.log(`Listo por el puerto ${this.port}`);
         });
-    }
+      }
+
+    // listen() {
+    //     this.app.listen(this.port, () => {
+    //         console.log(`Listo por el puerto ${this.port}`)
+    //     });
+    // }
 
     async dbConnection() {
         try {
