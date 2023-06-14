@@ -4,9 +4,9 @@ import swaggerUi from "swagger-ui-express";
 import swaggerSetup from "./Docs/swagger"
 import cors from "cors";
 import { router } from "./Routes";
+require('dotenv').config()
 import * as https from 'https';
 import * as fs from 'fs';
-
 import db from "./Database/connection";
 
 import "./Models/state.model";
@@ -25,21 +25,17 @@ class Server {
 
         this.dbConnection();
         this.app.use(cors());
-        this.app.use(router);
-        this.startServer();
+        this.app.use(router);    
     }
 
-    private startServer() {
+    startServer() {
         https.createServer({  
             cert: fs.readFileSync('./ssl/bundle.cer'),
-            key: fs.readFileSync('./ssl/devdcm.com.key') }, this.app);
+            key: fs.readFileSync('./ssl/devdcm.com.key')
+            }, this.app).listen(this.port, () => {
+                console.log(`Listo por el puerto ${this.port}`)
+            });
       }
-
-     listen() {
-         this.app.listen(this.port, () => {
-             console.log(`Listo por el puerto ${this.port}`)
-         });
-     }
 
     async dbConnection() {
         try {
@@ -51,9 +47,6 @@ class Server {
         }
 
     }
-
-
-
 }
 
 export default Server;
