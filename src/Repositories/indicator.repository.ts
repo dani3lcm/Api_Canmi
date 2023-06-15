@@ -9,7 +9,8 @@ class IndicatorRepository extends BaseRepository<Model>{
     constructor(){         
         super(); 
         this.model = Indicator;
-        this.model = Question;        
+        this.model = Question;  
+        this.model = Questions_options;      
     }
 
     async getIndicators() {        
@@ -17,10 +18,10 @@ class IndicatorRepository extends BaseRepository<Model>{
             const indicators = await Indicator.findAll({
                 include: [
                     {
-                      model: Question, 
+                      model: Question,
                       include: [
-                        Questions_options
-                      ]  
+                        Questions_options, 
+                      ],
                     }
                   ]
               });
