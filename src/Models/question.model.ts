@@ -1,7 +1,6 @@
 import { DataTypes } from "sequelize";
 import db from "../Database/connection";
 
-
 const questions = db.define('questions', {
     question_id: {
         type: DataTypes.INTEGER,
@@ -16,16 +15,26 @@ const questions = db.define('questions', {
     },
     indicator_id: {
         type: DataTypes.INTEGER
-    },
-    status: {
-        type: DataTypes.BOOLEAN        
-    },
-    created_at: {
-        type: DataTypes.DATE        
-    },
-    updated_at: {
-        type: DataTypes.DATE        
     }
 }, { timestamps: false });
+
+const Question_options = db.define('question_options', {
+    question_id: {
+        type: DataTypes.INTEGER,
+        primaryKey: true
+    },
+    description: {
+        type: DataTypes.STRING,
+        allowNull: false
+    },
+    option_value: {
+        type: DataTypes.STRING
+    }
+}, { timestamps: false });
+
+questions.belongsTo(Question_options, {
+    foreignKey: 'question_id'
+  });
+
 
 export default questions;

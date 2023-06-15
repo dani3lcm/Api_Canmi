@@ -1,17 +1,29 @@
 import { Model } from "sequelize";
 import Indicator from "../Models/indicator.model";
+import Question from "../Models/question.model";
 import BaseRepository from "../Abstracts/base.repository";
+import Questions_options from "../Models/question_option.model";
 
 class IndicatorRepository extends BaseRepository<Model>{
     protected model;
     constructor(){         
         super(); 
         this.model = Indicator;
+        this.model = Question;        
     }
 
     async getIndicators() {        
         try {
-            const indicators = await Indicator.findAll();
+            const indicators = await Indicator.findAll({
+                include: [
+                    {
+                      model: Question, 
+                      include: [
+                        Questions_options
+                      ]  
+                    }
+                  ]
+              });
             console.log('indicators:::', indicators);
             return indicators;
         } catch (err) {
@@ -30,52 +42,6 @@ class IndicatorRepository extends BaseRepository<Model>{
             return [];
         }
     }
-
-    // async createState(State:any) {
-    //     let data = {};
-    //     try {
-    //         //State.createdAt = new Date().toISOString();
-    //         console.log('Repository_createState');
-    //         console.log(State);
-    //         data = await this.model.create(State);            
-    //     } catch(err) {
-    //         //logger.error('Error::' + err);
-    //         console.log(err);
-    //     }
-    //     return data;
-    // }
-
-    // async updateState(Id:any, State:any) {
-    //     let data = {};
-    //     try {
-    //         const state = await this.model.findByPk(Id);
-    //         if(!state){
-    //             // En caso de que no exista
-    //         }else{
-    //             data = await state.update(State);
-    //         }
-    //         return data;
-    //     } catch(err) {
-    //         //logger.error('Error::' + err);
-    //     }
-    //     return data;
-    // }
-
-    // async deleteState(Id:any) {
-    //     let data = {};
-    //     try {
-    //         data = await State.destroy({
-    //             where: {
-    //                 Id: Id
-    //             }
-    //         });
-    //         return data;
-    //     } catch(err) {
-    //         //logger.error('Error::' + err);
-    //     }
-    //     return data;
-    //     //return {status: `${data.deletedCount > 0 ? true : false}`};
-    // }
 
     async restoreIndicator(Id:any) {
         let data = {};

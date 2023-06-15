@@ -22,16 +22,25 @@ const indicators = db.define('indicators', {
     },
     color: {
         type: DataTypes.STRING
-    },
-    status: {
-        type: DataTypes.BOOLEAN        
-    },
-    created_at: {
-        type: DataTypes.DATE        
-    },
-    updated_at: {
-        type: DataTypes.DATE        
     }
 }, { timestamps: false });
+
+const questions = db.define('questions', {
+    question_id: {
+        type: DataTypes.INTEGER,
+        primaryKey: true
+    },
+    description: {
+        type: DataTypes.STRING,
+        allowNull: false
+    },
+    type_question_id: {
+        type: DataTypes.INTEGER
+    }
+}, { timestamps: false });
+
+indicators.hasMany(questions, {
+    foreignKey: 'indicator_id'
+  });
 
 export default indicators;

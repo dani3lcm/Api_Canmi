@@ -21,7 +21,7 @@ export const getIndicator = async (req: Request, res: Response) => {
         const { indicator_id } = req.params;
         const data = await indicatorService.getIndicator(indicator_id);
         res.json({
-            msg: 'getState',
+            msg: 'getIndicator',
             id: indicator_id,
             data: data
         });
@@ -29,44 +29,3 @@ export const getIndicator = async (req: Request, res: Response) => {
         handleHttp(res, "ERROR_GET_INDICATOR")
     }
 }
-
-// export const postClinic = (req: Request, res: Response) => {
-//     try {
-//         const { body } = req;
-
-//         res.json({
-//             msg: 'postClinic',
-//             body
-//         });
-//     } catch (e) {
-//         handleHttp(res, "ERROR_POST_CLINIC")
-//     }
-// }
-
-// export const putClinic = (req: Request, res: Response) => {
-//     try {
-//         const { id } = req.params;
-//         const { body } = req;
-
-//         res.json({
-//             msg: 'putClinic',
-//             id,
-//             body
-//         });
-//     } catch (e) {
-//         handleHttp(res, "ERROR_PUT_CLINIC")
-//     }
-// }
-
-// export const deleteClinic = (req: Request, res: Response) => {
-//     try {
-//         const { id } = req.params;
-
-//         res.json({
-//             msg: 'deleteClinic',
-//             id
-//         });
-//     } catch (e) {
-//         handleHttp(res, "ERROR_DELETE_CLINIC")
-//     }
-// }
