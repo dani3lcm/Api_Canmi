@@ -1,6 +1,7 @@
 import { DataTypes } from "sequelize";
 import db from "../Database/connection";
 import questions from "./question.model";
+import stage from "./stage.model";
 
 
 const indicators = db.define('indicators', {
@@ -30,5 +31,7 @@ const indicators = db.define('indicators', {
 indicators.hasMany(questions, {
     foreignKey: 'indicator_id'
   });
-
+indicators.hasOne(stage, {
+    foreignKey: 'stage_id'
+  });
 export default indicators;

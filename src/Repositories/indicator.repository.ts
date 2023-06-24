@@ -19,9 +19,9 @@ class IndicatorRepository extends BaseRepository<Model>{
                 include: [
                     {
                       model: Question,
-                      include: [
-                        Questions_options, 
-                      ],
+                       include: [
+                         Questions_options, 
+                       ],
                     }
                   ]
               });
