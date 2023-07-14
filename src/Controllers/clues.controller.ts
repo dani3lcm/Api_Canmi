@@ -18,11 +18,11 @@ export const getClues = async (req: Request, res: Response) => {
 
 export const getClue = async (req: Request, res: Response) => {
     try {
-        const { clue_id } = req.params;
-        const data = await clueService.getClue(clue_id);
+        const { entity_key, key_municipality } = req.params;
+        const data = await clueService.getClue(entity_key, key_municipality);
         res.json({
             msg: 'getClue',
-            id: clue_id,
+            id: entity_key,
             data: data
         });
     } catch (e) {

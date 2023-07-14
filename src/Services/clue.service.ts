@@ -10,8 +10,8 @@ class ClueService {
         return await this.clueRepository.getClues();
     }
 
-    async getClue(key_municipality:any) {
-        return await this.clueRepository.getClue(key_municipality);
+    async getClue(entity_key:any, key_municipality:any) {
+        return await this.clueRepository.getClue(entity_key, key_municipality);
     }
 
 

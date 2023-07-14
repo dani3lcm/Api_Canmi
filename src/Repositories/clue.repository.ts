@@ -24,10 +24,10 @@ class ClueRepository extends BaseRepository<Model>{
         }
     }
 
-    async getClue(key_municipality:any) {        
+    async getClue(entity_key:any, key_municipality:any) {        
         try {           
             const clue = await Clues.findAll({
-                where: { key_municipality: key_municipality },
+                where: { entity_key: entity_key, key_municipality: key_municipality },
               });
             console.log('clue:::', clue);
             return clue;
