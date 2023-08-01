@@ -24,6 +24,9 @@ const indicators = db.define('indicators', {
     },
     color: {
         type: DataTypes.STRING
+    },
+    evaluation: {
+        type: DataTypes.STRING
     }
 }, { timestamps: false });
 

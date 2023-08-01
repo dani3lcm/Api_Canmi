@@ -22,7 +22,7 @@ export const getClue = async (req: Request, res: Response) => {
         const data = await clueService.getClue(entity_key, key_municipality);
         res.json({
             msg: 'getClue',
-            id: entity_key,
+            parameter: [{'entity_key': entity_key},{'key_municipality': key_municipality}],
             data: data
         });
     } catch (e) {
