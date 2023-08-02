@@ -22,9 +22,6 @@ const indicators = db.define('indicators', {
     target: {
         type: DataTypes.STRING
     },
-    color: {
-        type: DataTypes.STRING
-    },
     evaluation: {
         type: DataTypes.STRING
     }

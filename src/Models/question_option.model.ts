@@ -17,6 +17,9 @@ const Question_options = db.define('question_options', {
     },
     option_value: {
         type: DataTypes.STRING
+    },
+    placeholder: {
+        type: DataTypes.STRING
     }
 }, { timestamps: false });
 

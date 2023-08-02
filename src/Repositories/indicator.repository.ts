@@ -35,7 +35,17 @@ class IndicatorRepository extends BaseRepository<Model>{
 
     async getIndicator(indicator_id:any) {        
         try {           
-            const indicator = await Indicator.findByPk(indicator_id);
+            const indicator = await Indicator.findAll({
+                include: [
+                    {
+                      model: Question,
+                       include: [
+                         Questions_options, 
+                       ],
+                    }
+                  ],
+                  where: { indicator_id: indicator_id }
+              });
             console.log('indicator:::', indicator);
             return indicator;
         } catch (err) {
